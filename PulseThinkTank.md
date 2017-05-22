@@ -15,3 +15,9 @@ Reporting on historical data using app server (eg. CPU over time)
 * Microservice config set the data retrieval interval
 
 Inactivity alerts (eg. alert if no data received for 2 intervals)
+
+## Compatability modes
+
+ * SQL Server 2016: 130
+ * Visual Studio 2015: C# 6
+ * SSDT 2017
