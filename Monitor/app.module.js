@@ -5,6 +5,7 @@
         'pulse.vendors',
         // all app modules defined below
         'pulse.common',
-        'pulse.home'
+        'pulse.home',
+        'pulse.sampling'
     ]);
 })();
