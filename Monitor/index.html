@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="node_modules/angular-toastr/dist/angular-toastr.min.css">
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css"/>
-    <link rel="stylesheet" type="text/css" href="scripts/malhar-angular-dashboard/dist/malhar-angular-dashboard.css">
+    <link rel="stylesheet" type="text/css" href="scripts/malhar-angular-dashboard/malhar-angular-dashboard.css">
     <link rel="stylesheet" type="text/css" href="node_modules/highcharts/css/highcharts.css">
     <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="scripts/dark-admin-theme/css/local.css">
@@ -19,50 +19,50 @@
     <script type="text/javascript" src="node_modules/angular-base64/angular-base64.min.js"></script>
     <script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="node_modules/angular-toastr/dist/angular-toastr.min.js"></script>
-    <script type="text/javascript" src="scripts/malhar-angular-dashboard/dist/malhar-angular-dashboard.js"></script>
     <script type="text/javascript" src="node_modules/angular-local-storage/src/angular-local-storage.js"></script>
+    <script type="text/javascript" src="scripts/malhar-angular-dashboard/malhar-angular-dashboard.js"></script>
 
 
     <script type="text/javascript" src="app.module.js"></script>
     <script type="text/javascript" src="app.vendors.module.js"></script>
-    <script type="text/javascript" src="Modules/common/account/account.module.js"></script>
-    <script type="text/javascript" src="Modules/common/account/forgotpassword/forgotpassword.module.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/authentication.module.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/basic/basic.module.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/jwt/jwt.module.js"></script>
-    <script type="text/javascript" src="Modules/common/common.module.js"></script>
-    <script type="text/javascript" src="Modules/common/navbar/navbar.module.js"></script>
-    <script type="text/javascript" src="Modules/common/toaster/toaster.module.js"></script>
-    <script type="text/javascript" src="Modules/home/home.module.js"></script>
-    <script type="text/javascript" src="Modules/sampling/sampling.module.js"></script>
+    <script type="text/javascript" src="Modules/shared/account/account.module.js"></script>
+    <script type="text/javascript" src="Modules/shared/account/forgotpassword/forgotpassword.module.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/authentication.module.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/basic/basic.module.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/jwt/jwt.module.js"></script>
+    <script type="text/javascript" src="Modules/shared/common.module.js"></script>
+    <script type="text/javascript" src="Modules/shared/navbar/navbar.module.js"></script>
+    <script type="text/javascript" src="Modules/shared/toaster/toaster.module.js"></script>
+    <script type="text/javascript" src="Modules/components/home/home.module.js"></script>
+    <script type="text/javascript" src="Modules/components/sampling/sampling.module.js"></script>
 
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="app.config.js"></script>
 
     <script type="text/javascript" src="Modules/resources/resource.config.js"></script>
-    <script type="text/javascript" src="Modules/common/account/account.config.js"></script>
-    <script type="text/javascript" src="Modules/common/account/forgotpassword/forgotpassword.config.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/basic/basic.config.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/jwt/jwt.config.js"></script>
-    <script type="text/javascript" src="Modules/common/toaster/toaster.config.js"></script>
-    <script type="text/javascript" src="Modules/home/home.config.js"></script>
-    <script type="text/javascript" src="Modules/sampling/sampling.config.js"></script>
+    <script type="text/javascript" src="Modules/shared/account/account.config.js"></script>
+    <script type="text/javascript" src="Modules/shared/account/forgotpassword/forgotpassword.config.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/basic/basic.config.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/jwt/jwt.config.js"></script>
+    <script type="text/javascript" src="Modules/shared/toaster/toaster.config.js"></script>
+    <script type="text/javascript" src="Modules/components/home/home.config.js"></script>
+    <script type="text/javascript" src="Modules/components/sampling/sampling.config.js"></script>
 
     <script type="text/javascript" src="Modules/resources/Account.js"></script>
 
-    <script type="text/javascript" src="Modules/common/account/forgotpassword/directives/activate-account.js"></script>
-    <script type="text/javascript" src="Modules/common/account/forgotpassword/directives/forgotpassword.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/basic/services/authenticationFactory.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/basic/services/authHttpInterceptorFactory.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/basic/services/heartbeatFactory.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/jwt/services/authenticationFactory.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/jwt/services/jwtDecodeFacotry.js"></script>
-    <script type="text/javascript" src="Modules/common/authentication/jwt/services/jwtHttpInterceptorFactory.js"></script>
-    <script type="text/javascript" src="Modules/common/navbar/controller/navbar.js"></script>
-    <script type="text/javascript" src="Modules/common/navbar/directives/navbar.js"></script>
-    <script type="text/javascript" src="Modules/common/toaster/services/toasterFactory.js"></script>
-    <script type="text/javascript" src="Modules/home/controllers/home.js"></script>
-    <script type="text/javascript" src="Modules/sampling/controllers/sampling.js"></script>
+    <script type="text/javascript" src="Modules/shared/account/forgotpassword/activate-account.js"></script>
+    <script type="text/javascript" src="Modules/shared/account/forgotpassword/forgotpassword.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/basic/authenticationFactory.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/basic/authHttpInterceptorFactory.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/basic/heartbeatFactory.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/jwt/authenticationFactory.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/jwt/jwtDecodeFacotry.js"></script>
+    <script type="text/javascript" src="Modules/shared/authentication/jwt/jwtHttpInterceptorFactory.js"></script>
+    <script type="text/javascript" src="Modules/shared/navbar/navbar.js"></script>
+    <script type="text/javascript" src="Modules/shared/navbar/navbar.js"></script>
+    <script type="text/javascript" src="Modules/shared/toaster/toasterFactory.js"></script>
+    <script type="text/javascript" src="Modules/components/home/controllers/home.js"></script>
+    <script type="text/javascript" src="Modules/components/sampling/controllers/sampling.js"></script>
 
 </head>
 

@@ -723,7 +723,7 @@
     <Content Include="node_modules\bower\lib\commands\cache\clean.js" />
     <Content Include="node_modules\bower\lib\commands\cache\list.js" />
     <Content Include="node_modules\bower\lib\commands\help.js" />
-    <Content Include="node_modules\bower\lib\commands\home.js" />
+    <Content Include="node_modules\bower\lib\commands\homeController.js" />
     <Content Include="node_modules\bower\lib\commands\index.js" />
     <Content Include="node_modules\bower\lib\commands\info.js" />
     <Content Include="node_modules\bower\lib\commands\init.js" />
@@ -7745,8 +7745,8 @@
     <Content Include="Views\Common\authentication\basic\services\authHttpInterceptorFactory.js" />
     <Content Include="Views\Common\authentication\basic\services\heartbeatFactory.js" />
     <Content Include="Views\Common\common.module.js" />
-    <Content Include="Views\Common\navbar\Controller\navbar.js" />
-    <Content Include="Views\Common\navbar\directives\navbar.js" />
+    <Content Include="Views\Common\navbar\Controller\navbarController.js" />
+    <Content Include="Views\Common\navbar\directives\navbarDirective.js" />
     <Content Include="Views\Common\navbar\navbar.module.js" />
     <Content Include="Views\Common\navbar\Templates\navbar.tpl.html" />
     <Content Include="Views\Common\toaster\services\toasterFactory.js" />

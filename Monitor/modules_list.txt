@@ -28,8 +28,8 @@
 ./Modules/common/authentication/jwt/services/jwtHttpInterceptorFactory.js
 ./Modules/common/authentication/jwt/tests/jwtDecode.spec.js
 ./Modules/common/common.module.js
-./Modules/common/navbar/controller/navbar.js
-./Modules/common/navbar/directives/navbar.js
+./Modules/common/navbar/controller/navbarController.js
+./Modules/common/navbar/directives/navbarDirective.js
 ./Modules/common/navbar/navbar.module.js
 ./Modules/common/toaster/services/toasterFactory.js
 ./Modules/common/toaster/toaster.config.js
@@ -434,7 +434,7 @@
 ./node_modules/bower/lib/commands/cache/clean.js
 ./node_modules/bower/lib/commands/cache/list.js
 ./node_modules/bower/lib/commands/help.js
-./node_modules/bower/lib/commands/home.js
+./node_modules/bower/lib/commands/homeController.js
 ./node_modules/bower/lib/commands/index.js
 ./node_modules/bower/lib/commands/info.js
 ./node_modules/bower/lib/commands/init.js
