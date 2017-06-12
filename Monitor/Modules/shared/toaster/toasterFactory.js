@@ -2,7 +2,7 @@
     'use strict';
     // factory
     angular
-        .module('pulse.common.toaster')
+        .module('pulse.toaster')
         .factory('toaster', Toaster);
 
     Toaster.$inject = ['$log', 'toastr'];

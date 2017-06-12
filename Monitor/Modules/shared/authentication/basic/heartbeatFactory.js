@@ -2,7 +2,7 @@
     'use strict';
     // factory
     angular
-        .module('pulse.common.authentication.basic.heartbeat',[])
+        .module('pulse.authentication.basic.heartbeat',[])
         .factory('heartbeat', Heartbeat);
 
     Heartbeat.$inject = ['$timeout', 'HeartBeat'];

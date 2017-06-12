@@ -7,10 +7,10 @@
 			Note that the 'authentication service' will have different features exposed depending on which authentication you choose.
 			
 			*/
-	angular.module('pulse.common.authentication', [
+	angular.module('pulse.authentication', [
 
-		//'pulse.shared.authentication.basic',
-		'pulse.common.authentication.jwt'
+		//'pulse.authentication.basic',
+		'pulse.authentication.jwt'
 	]);
 
 })();

@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	angular.module('pulse.common.toaster', [
+	angular.module('pulse.toaster', [
 			'toastr'
 		]);
 

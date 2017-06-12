@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('pulse.common.navbar.controller', [])
+        .module('pulse.navbar.controller', [])
         .controller('NavBarController', NavBarController);
 
     NavBarController.$inject = ['$log', 'toaster', 'authentication', '$rootScope', '$state', 'Account', 'localStorageService'];

@@ -1,10 +1,10 @@
 (function () {
 	'use strict';
 
-	angular.module('pulse.common.authentication.basic', [
-		'pulse.common.authentication.basic.factory',
-		'pulse.common.authentication.basic.interceptor',
-		'pulse.common.authentication.basic.heartbeat'
+	angular.module('pulse.authentication.basic', [
+		'pulse.authentication.basic.factory',
+		'pulse.authentication.basic.interceptor',
+		'pulse.authentication.basic.heartbeat'
 	]);
 
 })();

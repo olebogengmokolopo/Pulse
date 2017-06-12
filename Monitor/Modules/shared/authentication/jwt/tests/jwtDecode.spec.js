@@ -6,7 +6,7 @@
   describe('jwtDecode', function() {
 
     beforeEach(function() {
-      angular.mock.module('silvertip');
+      angular.mock.module('pulse');
     });
 
     describe('no expiration tokens', function() {

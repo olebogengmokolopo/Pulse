@@ -2,7 +2,7 @@
     'use strict';
     // factory
     angular
-        .module('pulse.common.authentication.basic.interceptor', [])
+        .module('pulse.authentication.basic.interceptor', [])
         .factory('basicAuthHttpInterceptor', ['$log', '$q', '$injector', '$rootScope', function ($log, $q, $injector, $rootScope) {
             var authentication;
             return {

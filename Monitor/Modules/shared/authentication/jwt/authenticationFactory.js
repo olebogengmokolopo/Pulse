@@ -2,7 +2,7 @@
     'use strict';
     // factory
     angular
-        .module('pulse.common.authentication.jwt.factory', [])
+        .module('pulse.authentication.jwt.factory', [])
         .factory('authentication', Authentication);
 
     Authentication.$inject = ['$log', '$q', '$http', 'localStorageService', 'Account', 'toaster', 'jwtTokenDecoder'];

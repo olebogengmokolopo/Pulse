@@ -2,7 +2,7 @@
     'use strict';
     // factory
     angular
-        .module('pulse.common.jwt-authentication.interceptor', [])
+        .module('pulse.authentication.jwt.interceptor', [])
         .factory('jwtAuthInterceptor',JwtAuthInterceptor);
 
         JwtAuthInterceptor.$inject = ['$q', '$injector', '$location', 'localStorageService', '$rootScope'];

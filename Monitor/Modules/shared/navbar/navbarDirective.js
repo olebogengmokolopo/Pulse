@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('pulse.common.navbar')
+        .module('pulse.navbar')
         .directive('navbar', navbar);
 
     function navbar() {

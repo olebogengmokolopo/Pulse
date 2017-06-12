@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('pulse.common.navbar', [
-      'pulse.common.navbar.controller'
+    angular.module('pulse.navbar', [
+      'pulse.navbar.controller'
     ]);
 
 })();

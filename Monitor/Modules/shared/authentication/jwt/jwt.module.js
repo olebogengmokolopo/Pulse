@@ -1,10 +1,10 @@
 (function () {
 	'use strict';
 
-	angular.module('pulse.common.authentication.jwt', [
-		'pulse.common.authentication.jwt.factory',
-		'pulse.common.jwt-authentication.interceptor',
-		'pulse.common.jwt-authentication.decode',
+	angular.module('pulse.authentication.jwt', [
+		'pulse.authentication.jwt.factory',
+		'pulse.authentication.jwt.interceptor',
+		'pulse.authentication.jwt.decode'
 	]);
 
 })();

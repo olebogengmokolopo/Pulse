@@ -3,7 +3,7 @@
     'use strict';
     // factory
     angular
-        .module('pulse.common.jwt-authentication.decode', [])
+        .module('pulse.authentication.jwt.decode', [])
         .factory('jwtTokenDecoder', ['$window', '$base64', function ($window, $base64) {
 
             var jwtAuthDecoder = {};

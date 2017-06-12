@@ -24,7 +24,5 @@
                     state: 'sampling'
                 }
             });
-
     }
-
 })();

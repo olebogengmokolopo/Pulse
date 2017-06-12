@@ -2,7 +2,7 @@
     'use strict';
     // factory
     angular
-        .module('pulse.common.authentication.basic.factory', [])
+        .module('pulse.authentication.basic.factory', [])
         .factory('authentication', Authentication);
 
     Authentication.$inject = ['$log', '$state', 'Account', 'heartbeat', 'localStorageService', 'toaster'];

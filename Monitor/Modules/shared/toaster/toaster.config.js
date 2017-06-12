@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('pulse.common.toaster')
+    angular.module('pulse.toaster')
         .config(function (toastrConfig) {
             angular.extend(toastrConfig, {
                 allowHtml: true,

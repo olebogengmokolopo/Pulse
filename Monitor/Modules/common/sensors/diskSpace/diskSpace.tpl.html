@@ -1,0 +1,23 @@
+<div class="col-lg-6" ng-controller="DiskSpaceController as ctrl">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Storage Space</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row" ng-repeat="drive in ctrl.drives track by $index">
+                <h5>
+                    <div class="col-md-1">{{drive.volume}}</div>
+                    <div class="col-md-5">{{drive.label}}</div>
+                </h5>
+                <div class="col-md-3">{{drive.totalSpace}}</div>
+                <div class="col-md-3"></div>
+                <div class="col-md-12">
+                    <uib-progress class="progress-striped" max="drive.totalSpace">
+                        <uib-bar value="drive.usedSpace" type="{{drive.alertType}}">{{drive.usedSpace}}GB</uib-bar>
+                        <uib-bar value="drive.freeSpace" type="default">{{drive.freeSpace}}GB</uib-bar>
+                    </uib-progress>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('pulse.common.authentication.jwt')
+    angular.module('pulse.authentication.jwt')
         .config(function ($httpProvider) {
             $httpProvider.interceptors.push('jwtAuthInterceptor');
         });
