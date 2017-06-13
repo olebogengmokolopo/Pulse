@@ -32,7 +32,7 @@
                     freeSpace: 910,
                     usedSpace: 4768,
                     alertType: "danger"
-                },
+                }/*,
                 {
                     volume: "E:/",
                     label: "Logging",
@@ -40,7 +40,7 @@
                     freeSpace: 34,
                     usedSpace: 89,
                     alertType: "warning"
-                }
+                }*/
             ];
         }
 

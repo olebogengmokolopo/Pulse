@@ -1,14 +1,15 @@
 ﻿namespace Monitor.Controllers
 {
-    public class Disk
+    public class DiskSummary
     {
-        string label;
-        string volume;
-        float availableSpace;
-        float totalSpace;
-        float usedSpace;
+        public string label { get; }
+        public string volume { get; }
+        public float availableSpace { get; }
+        public float totalSpace { get; }
+        public float usedSpace { get; }
+        
 
-        public Disk(string label, string volume, float availableSpace, float totalSpace)
+        public DiskSummary(string label, string volume, float totalSpace, float availableSpace)
         {
             this.label = label;
             this.volume = volume;
