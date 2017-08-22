@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace Monitor.Controllers
 {
@@ -11,10 +9,36 @@ namespace Monitor.Controllers
     public class DiskSpaceController : ApiController
     {
         // GET api/values
-        public IEnumerable<DiskSummary> Get()
+        [Authorize]
+        [Route("", Name = "GetDiskSummaries")]
+        [HttpGet]
+        [ResponseType(typeof(List<DiskSensorReading>))]
+        public IEnumerable<DiskSensorReading> GetDiskSummaries()
         {
-            var diskSummaries = new List<DiskSummary> { new DiskSummary("C:/", "OS Drive", 1234, 456) };
+            var diskSummaries = new List<DiskSensorReading> { new DiskSensorReading(DateTime.Now, "C:/", "OS Drive", 1234, 456) };
             return diskSummaries;
+        }
+
+        [Authorize]
+        [Route("history", Name = "GetDiskHistories")]
+        [HttpGet]
+        [ResponseType(typeof(List<DiskSensorReading>))]
+        public IEnumerable<DiskSensorReading> GetDiskHistories(int previousDays = 7)
+        {
+            var diskHistories = new List<DiskSensorReading> { new DiskSensorReading(DateTime.Now, "C:/", "OS Drive", 1234, 456) };
+            return diskHistories;
+        }
+
+        [Authorize]
+        [Route("", Name = "CreateNewDiskReading")]
+        [HttpPost]
+        public IHttpActionResult GetDiskHistories([FromBody]DiskSensorReading diskSensorDto)
+        {
+            var diskHistories = new List<DiskSensorReading> { new DiskSensorReading(DateTime.Now, "C:/", "OS Drive", 1234, 456) };
+
+            return Ok();
         }
     }
 }
+
+
