@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Monitor.Controllers;
+using Monitor.Models;
 
 namespace Stethoscope.Sensors
 {
