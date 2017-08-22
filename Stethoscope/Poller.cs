@@ -1,10 +1,5 @@
 ﻿using Stethoscope.Sensors;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Stethoscope
 {
@@ -16,7 +11,7 @@ namespace Stethoscope
         public Poller(SqlConnection connection, ISensor<T> sensor)
         {
             _connection = connection;
-            _sensor = sensor;
+            _sensor = sensor;   
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.VisualBasic.ApplicationServices;
+using Monitor.Models;
 
 namespace Monitor.Controllers
 {
@@ -15,7 +17,16 @@ namespace Monitor.Controllers
         [ResponseType(typeof(List<DiskSensorReading>))]
         public IEnumerable<DiskSensorReading> GetDiskSummaries()
         {
-            var diskSummaries = new List<DiskSensorReading> { new DiskSensorReading(DateTime.Now, "C:/", "OS Drive", 1234, 456) };
+            List<DiskSensorReading> diskSummaries;
+            using (var context = new PulseContext())
+            {
+                diskSummaries = context.DiskSensorReadings
+                    .Select(r => r)
+                    .GroupBy(r => r.Volume)
+                    .Select(g => g.OrderByDescending(r => r.Timestamp).First())
+                    .Select(r => new DiskSensorReading(r.Timestamp, r.Label, r.Volume, r.TotalSpace, r.AvailableSpace))
+                    .ToList();
+            }
             return diskSummaries;
         }
 
@@ -25,7 +36,14 @@ namespace Monitor.Controllers
         [ResponseType(typeof(List<DiskSensorReading>))]
         public IEnumerable<DiskSensorReading> GetDiskHistories(int previousDays = 7)
         {
-            var diskHistories = new List<DiskSensorReading> { new DiskSensorReading(DateTime.Now, "C:/", "OS Drive", 1234, 456) };
+            List<DiskSensorReading> diskHistories;
+            using (var context = new PulseContext())
+            {
+                diskHistories = context.DiskSensorReadings
+                                    .Select(reading => reading)
+                                    .Where(reading => reading.Timestamp.AddDays(previousDays) > DateTime.Now)
+                                    .ToList();
+            }
             return diskHistories;
         }
 
@@ -34,8 +52,11 @@ namespace Monitor.Controllers
         [HttpPost]
         public IHttpActionResult GetDiskHistories([FromBody]DiskSensorReading diskSensorDto)
         {
-            var diskHistories = new List<DiskSensorReading> { new DiskSensorReading(DateTime.Now, "C:/", "OS Drive", 1234, 456) };
-
+            using (var context = new PulseContext())
+            {
+                context.DiskSensorReadings.Add(diskSensorDto);
+                context.SaveChanges();
+            }
             return Ok();
         }
     }

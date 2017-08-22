@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Monitor.Models;
 
 namespace Stethoscope.Sensors
 {
-    public interface ISensor<T>
+    public interface ISensor<out T> where T : ISensorReading
     {
         IEnumerable<T> MakeReading();
     }
