@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using Monitor.Models;
+﻿using System.Collections.Generic;
+using Common;
+using Common.Sensors;
 
 namespace Stethoscope.Sensors
 {
-    class DiskSpaceSensor : ISensor<DiskSensorReading>
+    public class DiskSpaceSensor : Sensor<DiskSensorReading>
     {
-        public IEnumerable<DiskSensorReading> MakeReading()
+        public DiskSpaceSensor(SqlConnectionManager connectionManager) : base(connectionManager)
         {
-            throw new NotImplementedException();
+        }
+
+        public override IEnumerable<DiskSensorReading> MakeReading()
+        {
+            var procedureResult = ConnectionManager.ExecuteStoredProcWithReader("Sensors.ReadDiskSpace");
+            var readings = DiskSensorReading.FromDataReader(procedureResult.DataReader);
+
+            return readings;
         }
     }
 }

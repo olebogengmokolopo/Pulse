@@ -83,6 +83,9 @@
       <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.2.1.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
       <Private>True</Private>
@@ -123,6 +126,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -210,13 +216,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DiskSpaceController.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\DiskSensorReading.cs" />
-    <Compile Include="Models\ISensorReading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PulseContext.cs" />
-    <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -384,20 +386,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Views\Common\authentication\authentication.module.js" />
-    <Content Include="Views\Common\authentication\basic\basic.config.js" />
-    <Content Include="Views\Common\authentication\basic\basic.module.js" />
-    <Content Include="Views\Common\authentication\basic\services\authenticationFactory.js" />
-    <Content Include="Views\Common\authentication\basic\services\authHttpInterceptorFactory.js" />
-    <Content Include="Views\Common\authentication\basic\services\heartbeatFactory.js" />
-    <Content Include="Views\Common\common.module.js" />
-    <Content Include="Views\Common\navbar\Controller\navbarController.js" />
-    <Content Include="Views\Common\navbar\directives\navbarDirective.js" />
-    <Content Include="Views\Common\navbar\navbar.module.js" />
-    <Content Include="Views\Common\navbar\Templates\navbar.tpl.html" />
-    <Content Include="Views\Common\toaster\services\toasterFactory.js" />
-    <Content Include="Views\Common\toaster\toaster.config.js" />
-    <Content Include="Views\Common\toaster\toaster.module.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -409,8 +397,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\highcharts\css\images\" />
-    <Folder Include="Modules\" />
     <Folder Include="Providers\" />
+    <Folder Include="Results\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -420,6 +409,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{cb0df89d-1b52-4345-a593-f39eeb1755e2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PulseAuth\PulseAuth.csproj">
+      <Project>{8A3BA383-55E8-46B5-88DF-043351CDE187}</Project>
+      <Name>PulseAuth</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,12 +1,30 @@
-﻿using System.ServiceProcess;
+﻿using System.Configuration;
+using Common;
+using Common.Sensors;
+using Stethoscope.Sensors;
 
 namespace Stethoscope
 {
-    static class Program
+    public static class Program
     {
-        static void Main()
+        private static PulseReporter _reporter;
+        private static SensorPoller<DiskSensorReading> _diskSpacePoller;
+        private static DiskSpaceSensor _sensor;
+        private static SqlConnectionManager _connectionManager;
+
+        public static void Main()
         {
-            
+            var connectionString = ConfigurationManager.ConnectionStrings["sensorTargetConnection"].ConnectionString;
+            var reporterTargetBaseUri = ConfigurationManager.AppSettings["ReporterTargetBaseUri"];
+            var delayInSeconds = int.Parse(ConfigurationManager.AppSettings["PollerDelayInSeconds"]);
+
+            _connectionManager = new SqlConnectionManager(connectionString);
+
+            _reporter = new PulseReporter(reporterTargetBaseUri);
+            _sensor = new DiskSpaceSensor(_connectionManager);
+            _diskSpacePoller = new SensorPoller<DiskSensorReading>(_sensor, _reporter, delayInSeconds);
+
+            _diskSpacePoller.Start();
         }
     }
 }

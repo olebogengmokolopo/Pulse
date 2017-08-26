@@ -16,6 +16,7 @@
         var service = {
             login: login,
             logout: logout,
+            register: register,
             unauthorizedRequest: unauthorizedRequest,
             getCurrentUser: getCurrentUser,
             isLoggedIn: isLoggedIn,
@@ -93,6 +94,15 @@
             
             return deferred.promise;
         }
+
+        function register(registrationCredentials) {
+            logout();
+
+            return $http.post('/api/account/register', registrationCredentials).then(function (response) {
+                return response;
+            });
+        }
+
 
         function unauthorizedRequest() {
             var isAuthorizationDataKeyRemoved = localStorageService.remove(authorizationDataStorageKey);

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
+using System.Collections.Generic;
+using System.Data.Common;
 
-namespace Monitor.Models
+namespace Common.Sensors
 {
     public class DiskSensorReading : ISensorReading
     {
@@ -30,6 +29,23 @@ namespace Monitor.Models
             AvailableSpace = availableSpace;
             TotalSpace = totalSpace;
             UsedSpace = totalSpace - availableSpace;
+        }
+        public static IEnumerable<DiskSensorReading> FromDataReader(DbDataReader dataReader)
+        {
+            var sensorReadings = new List<DiskSensorReading>();
+
+            while (dataReader.Read())
+            {
+                var timestamp = (DateTime)dataReader["Timestamp"];
+                var label = dataReader["Label"].ToString();
+                var volume = dataReader["Volume"].ToString();
+                var availableSpace = (float)dataReader["AvailableSpace"];
+                var totalSpace = (float)dataReader["TotalSpace"];
+
+                sensorReadings.Add(new DiskSensorReading(timestamp, label, volume, totalSpace, availableSpace));
+            }
+
+            return sensorReadings;
         }
     }
 }

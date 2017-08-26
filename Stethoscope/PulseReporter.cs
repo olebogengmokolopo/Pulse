@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using Monitor.Models;
+using Common.Sensors;
 
 namespace Stethoscope
 {
-    class PulseReporter : IReporter
+    public class PulseReporter : IReporter
     {
         private readonly string _pulseServerAddress;
         private static readonly HttpClient HttpClient = new HttpClient();

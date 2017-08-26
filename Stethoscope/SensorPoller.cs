@@ -1,8 +1,7 @@
 ﻿using System;
 using Stethoscope.Sensors;
-using System.Data.SqlClient;
 using System.Threading;
-using Monitor.Models;
+using Common.Sensors;
 using NLog;
 
 namespace Stethoscope
@@ -15,7 +14,7 @@ namespace Stethoscope
         private bool _isPolling;
         private readonly int _delayInSeconds;
 
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         
         public SensorPoller(ISensor<T> sensor, IReporter reporter, int delayInSeconds)
         {
@@ -33,30 +32,30 @@ namespace Stethoscope
                 try
                 {
                     Poll();
-                    Thread.Sleep(_delayInSeconds);
+                    Thread.Sleep(_delayInSeconds * 1000);
                 }
                 catch (Exception e)
                 {
-                    Logger.Error("Sensor Exception occurred for: " + _sensor.GetType());
-                    Logger.Error(e);
+                    _logger.Error("Sensor Exception occurred for: " + _sensor.GetType());
+                    _logger.Error(e);
                     Stop();
                 }
             }
         }
 
-        public void Stop()
+        private void Stop()
         {
             _isPolling = false;
         }
 
-        public void Poll()
+        private void Poll()
         { 
             var readings = _sensor.MakeReading();
             foreach (var reading in readings)
             {
                 _reporter.Report(reading);
             }
-            Logger.Info("Sensor reading reported for: " + _sensor.GetType());
+            _logger.Info("Sensor reading reported for: " + _sensor.GetType());
         }
     }
 }

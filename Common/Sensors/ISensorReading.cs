@@ -1,4 +1,4 @@
-﻿namespace Monitor.Models
+﻿namespace Common.Sensors
 {
     public interface ISensorReading
     {

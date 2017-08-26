@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using System.Web.Http;
-using System.Web.Security;
+﻿using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Owin;

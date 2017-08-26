@@ -1,4 +1,4 @@
-using Monitor.Models;
+using Common.Sensors;
 
 namespace Stethoscope
 {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Monitor.Models;
+using Common.Sensors;
 
 namespace Stethoscope.Sensors
 {

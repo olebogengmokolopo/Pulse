@@ -10,6 +10,8 @@
         'pulse.home',
         'pulse.health',
         'pulse.sampling',
-        'pulse.sensors'
+        'pulse.sensors',
+        'pulse.register',
+        'pulse.login'
     ]);
 })();
