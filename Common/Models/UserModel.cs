@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PulseAuth.Models
+namespace Common.Models
 {
     public class UserModel
     {
@@ -18,6 +18,10 @@ namespace PulseAuth.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "E-mail Address")]
+        public string Email { get; set; }
 
         [Required]
         [Display(Name = "First Name")]

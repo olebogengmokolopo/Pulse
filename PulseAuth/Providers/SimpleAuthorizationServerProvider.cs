@@ -18,7 +18,7 @@ namespace PulseAuth.Providers
 
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            //context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
             using (var _repo = new AuthRepository())
             {

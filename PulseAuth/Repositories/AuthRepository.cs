@@ -1,33 +1,37 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Common.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PulseAuth.Contexts;
 using PulseAuth.Entities;
-using PulseAuth.Models;
 
 namespace PulseAuth.Repositories
 {
     public class AuthRepository : IDisposable
     {
-        private AuthContext _ctx;
+        private AuthContext _context;
 
         private ApplicationUserManager _userManager;
 
         public AuthRepository()
         {
-            _ctx = new AuthContext();
+            _context = new AuthContext();
             _userManager = new ApplicationUserManager(
                 new UserStore<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole,
-                    ApplicationUserClaim>(_ctx));
+                    ApplicationUserClaim>(_context));
         }
 
         public async Task<IdentityResult> RegisterUser(UserModel userModel)
         {
             var user = new ApplicationUser
             {
-                UserName = userModel.UserName
+                UserName = userModel.UserName,
+                Email = userModel.Email,
+                EmailConfirmed = true,
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName
             };
 
             var result = await _userManager.CreateAsync(user, user.PasswordHash); 
@@ -44,7 +48,7 @@ namespace PulseAuth.Repositories
 
         public void Dispose()
         {
-            _ctx.Dispose();
+            _context.Dispose();
             _userManager.Dispose();
 
         }

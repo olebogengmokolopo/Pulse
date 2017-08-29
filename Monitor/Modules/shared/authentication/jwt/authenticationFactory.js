@@ -57,9 +57,16 @@
 
             var deferred = $q.defer();
 
-            $http.post('/api/oauth/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+            var result = $http.post('/api/oauth/token', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
+            console.log(result);
+            $http.post('/api/oauth/token', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function (response) {
 
-                var isKeySet = localStorageService.set(authorizationDataStorageKey, { token: response.access_token, userName: loginCredentials.userName, refreshToken: '', useRefreshTokens: false });
+                var isKeySet = localStorageService.set(authorizationDataStorageKey, {
+                    token: response.access_token,
+                    userName: loginCredentials.userName,
+                    refreshToken: '',
+                    useRefreshTokens: false
+                });
                 if (!isKeySet) {
                     toaster.warning('Browser local storage not available.', 'Warning');
                 }
@@ -74,7 +81,7 @@
                     deferred.reject(err);
                 });
 
-            }).error(function (err) {
+            }, function (err) {
                 toaster.error('Incorrect login details provided', 'Error');
                 logout();
                 deferred.reject(err);

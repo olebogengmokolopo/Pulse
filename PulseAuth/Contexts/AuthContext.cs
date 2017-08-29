@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PulseAuth.Entities;
 
@@ -11,6 +12,11 @@ namespace PulseAuth.Contexts
             : base(ConfigurationManager.ConnectionStrings["PulseAuthContext"].ConnectionString)
         {
 
+        }
+
+        public static AuthContext Create()
+        {
+            return new AuthContext();
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using Common.Models;
 using Microsoft.AspNet.Identity;
-using PulseAuth.Models;
 using PulseAuth.Repositories;
 
 namespace Monitor.Controllers
 {
-    [RoutePrefix("api/Account")]
-    public class AccountController : ApiController
+    [RoutePrefix("api/accounts")]
+    public class AccountController : BaseApiController
     {
         private AuthRepository _repo;
 
@@ -17,7 +17,7 @@ namespace Monitor.Controllers
         }
 
         // POST api/Account/Register
-        [AllowAnonymous]
+        [AllowAnonymous] 
         [Route("Register")]
         public async Task<IHttpActionResult> Register(UserModel userModel)
         {
@@ -31,6 +31,21 @@ namespace Monitor.Controllers
             var errorResult = GetErrorResult(result);
 
             return errorResult ?? Ok();
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("user", Name = "GetCurrentUser")]
+        public async Task<IHttpActionResult> GetCurrentUser()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = CurrentUser;
+            
+            return /*errorResult ?? */Ok();
         }
 
         protected override void Dispose(bool disposing)

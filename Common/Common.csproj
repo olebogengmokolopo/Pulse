@@ -30,8 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTransferObjects\TenancyDto.cs" />
+    <Compile Include="DataTransferObjects\UserModelDto.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="SqlProcedureResult.cs" />
     <Compile Include="SqlConnectionManager.cs" />
     <Compile Include="Sensors\DiskSensorReading.cs" />

@@ -5,7 +5,7 @@ using Common.Sensors;
 
 namespace Monitor.Controllers
 {
-    [RoutePrefix("api/diskspace")]
+    [RoutePrefix("api/{tenantId}/diskspace")]
     public class DiskSpaceController : ApiController
     {
         // GET api/values
@@ -13,7 +13,7 @@ namespace Monitor.Controllers
         [Route("", Name = "GetDiskSummaries")]
         [HttpGet]
         [ResponseType(typeof(List<DiskSensorReading>))]
-        public IEnumerable<DiskSensorReading> GetDiskSummaries()
+        public IEnumerable<DiskSensorReading> GetDiskSummaries(int tenantId)
         {
             List<DiskSensorReading> diskSummaries = new List<DiskSensorReading>();
             //using (var context = new PulseContext())
@@ -32,7 +32,7 @@ namespace Monitor.Controllers
         [Route("history", Name = "GetDiskHistories")]
         [HttpGet]
         [ResponseType(typeof(List<DiskSensorReading>))]
-        public IEnumerable<DiskSensorReading> GetDiskHistories(int previousDays = 7)
+        public IEnumerable<DiskSensorReading> GetDiskHistories(int tenantId, int previousDays = 7)
         {
             List<DiskSensorReading> diskHistories = new List<DiskSensorReading>();
             //using (var context = new PulseContext())
@@ -48,7 +48,7 @@ namespace Monitor.Controllers
         [Authorize]
         [Route("", Name = "CreateNewDiskReading")]
         [HttpPost]
-        public IHttpActionResult GetDiskHistories([FromBody]DiskSensorReading diskSensorDto)
+        public IHttpActionResult GetDiskHistories(int tenantI, [FromBody]DiskSensorReading diskSensorDto)
         {
             //using (var context = new PulseContext())
             //{

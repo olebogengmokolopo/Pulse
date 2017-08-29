@@ -1,5 +1,6 @@
-using System.Web.Http;
+using Monitor.Authentication;
 using Swashbuckle.Application;
+using System.Web.Http;
 
 namespace Pulse
 {
@@ -137,7 +138,7 @@ namespace Pulse
                     // Operation filters.
                     //
                     //c.OperationFilter<AddDefaultResponse>();
-                    //c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
+                    c.OperationFilter<AddAuthorizationHeaderParameterOperationFilter>();
                     //
                     // If you've defined an OAuth2 flow as described above, you could use a custom Filter
                     // to inspect some attribute on each action and infer which (if any) OAuth2 scopes are required

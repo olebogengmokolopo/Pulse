@@ -2,6 +2,7 @@
     'use strict';
     angular.module('pulse')
         .run(['$rootScope', '$state', '$interpolate', 'authentication', 'toaster', function ($rootScope, $state, $interpolate,  authentication, toaster) {
+            console.log(authentication.isLoggedIn() );
             $rootScope.$state = $state;
             $rootScope.pageTitle = 'Pulse Monitor';
             $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {

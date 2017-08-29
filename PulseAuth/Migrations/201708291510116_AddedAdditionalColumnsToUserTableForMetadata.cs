@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace PulseAuth.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class AddedAdditionalColumnsToUserTableForMetadata : DbMigration
     {
         public override void Up()

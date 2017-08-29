@@ -20,6 +20,6 @@ namespace PulseAuth.Entities
         [MaxLength(512)]
         public string TenancyDescription { get; set; }
 
-        public virtual List<IdentityUser> AllowedUsers { get; set; }
+        public virtual List<ApplicationUser> AllowedUsers { get; set; }
     }
 }

@@ -23,16 +23,17 @@ namespace PulseAuth.Entities
     public class ApplicationUserClaim : IdentityUserClaim<int>
     {
     }
-
-
+    
     public class ApplicationUser : IdentityUser<int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
     {
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
+        public virtual List<Tenancy> Tenancies { get; set; }
+            
         public string FullName => FirstName + " " + LastName + " (" + UserName + ")";
-
+        
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager,
             string authenticationType)
         {

@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
+using Monitor.App_Start;
 using Owin;
 using Pulse;
 using PulseAuth.Providers;
@@ -15,32 +16,15 @@ namespace Monitor
 
         public void Configuration(IAppBuilder app)
         {
-            ConfigureOAuth(app);
             HttpConfiguration = new HttpConfiguration();
 
             SwaggerConfig.Register(HttpConfiguration);
             var container = DependencyInjectionConfig.Register(app, HttpConfiguration);
             WebApiConfig.Register(HttpConfiguration);
-
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            AuthenticationConfig.Register(app, container);
 
             app.UseWebApi(HttpConfiguration);
 
-        }
-
-        private void ConfigureOAuth(IAppBuilder app)
-        {
-            var oAuthServerOptions = new OAuthAuthorizationServerOptions()
-            {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/api/oauth/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new SimpleAuthorizationServerProvider()
-            };
-
-            // Token Generation
-            app.UseOAuthAuthorizationServer(oAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
     }
 }
