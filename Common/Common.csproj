@@ -41,13 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tenant.cs" />
     <Compile Include="SqlProcedureResult.cs" />
     <Compile Include="SqlConnectionManager.cs" />
     <Compile Include="Sensors\DiskSensorReading.cs" />
     <Compile Include="Sensors\ISensorReading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

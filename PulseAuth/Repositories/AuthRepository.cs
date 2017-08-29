@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PulseAuth.Contexts;
+using PulseAuth.Entities;
 using PulseAuth.Models;
 
 namespace PulseAuth.Repositories
@@ -11,27 +13,29 @@ namespace PulseAuth.Repositories
     {
         private AuthContext _ctx;
 
-        private UserManager<IdentityUser> _userManager;
+        private ApplicationUserManager _userManager;
 
         public AuthRepository()
         {
             _ctx = new AuthContext();
-            _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(_ctx));
+            _userManager = new ApplicationUserManager(
+                new UserStore<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole,
+                    ApplicationUserClaim>(_ctx));
         }
 
         public async Task<IdentityResult> RegisterUser(UserModel userModel)
         {
-            var user = new IdentityUser
+            var user = new ApplicationUser
             {
                 UserName = userModel.UserName
             };
 
-            var result = await _userManager.CreateAsync(user, userModel.Password);
+            var result = await _userManager.CreateAsync(user, user.PasswordHash); 
 
             return result;
         }
 
-        public async Task<IdentityUser> FindUser(string userName, string password)
+        public async Task<ApplicationUser> FindUser(string userName, string password)
         {
             var user = await _userManager.FindAsync(userName, password);
 

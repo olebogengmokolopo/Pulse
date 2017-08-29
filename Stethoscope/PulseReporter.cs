@@ -30,7 +30,7 @@ namespace Stethoscope
 
         private AuthenticationHeaderValue GetAuthenticationHeader()
         {
-            var authenticationData = "username:password";
+            var authenticationData = "grant_type=password&username=&password=";
 
             var authenticationBytes = Encoding.ASCII.GetBytes(authenticationData);
             return new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authenticationBytes));

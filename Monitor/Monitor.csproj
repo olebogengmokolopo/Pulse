@@ -255,7 +255,6 @@
     <Content Include="Content\highcharts\css\font-awesome.min.css" />
     <Content Include="Content\highcharts\css\jquery-ui.min.css" />
     <Content Include="Content\highcharts\css\jquery.sidr.bare.css" />
-    <Content Include="Content\highcharts\highcharts.html" />
     <Content Include="Content\highcharts\images\apple-touch-icon-114x114.png" />
     <Content Include="Content\highcharts\images\apple-touch-icon-120x120.png" />
     <Content Include="Content\highcharts\images\apple-touch-icon-144x144.png" />
@@ -272,7 +271,6 @@
     <Content Include="Content\highcharts\images\favicon-96x96.png" />
     <Content Include="Content\highcharts\images\Highcharts.svg" />
     <Content Include="Content\highcharts\images\sprite.png" />
-    <Content Include="Content\highcharts\js\api.js" />
     <Content Include="Content\highcharts\js\jquery-1.11.3.min.js" />
     <Content Include="Content\highcharts\js\jquery-ui.min.js" />
     <Content Include="Content\highcharts\js\jquery.sidr.min.js" />
