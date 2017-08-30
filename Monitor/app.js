@@ -2,7 +2,6 @@
     'use strict';
     angular.module('pulse')
         .run(['$rootScope', '$state', '$interpolate', 'authentication', 'toaster', function ($rootScope, $state, $interpolate,  authentication, toaster) {
-            console.log(authentication.isLoggedIn() );
             $rootScope.$state = $state;
             $rootScope.pageTitle = 'Pulse Monitor';
             $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
@@ -26,7 +25,6 @@
                 }
             });
         }])
-
         .controller('AppCtrl', AppController);
 
 
@@ -40,11 +38,13 @@
 
         scope.logStartUpMessage();
 
+        scope.currentUser = authentication.getCurrentUser();
+
         $rootScope.$watch(function () {
             return authentication.isLoggedIn();
         }, function () {
             scope.isLoggedIn = authentication.isLoggedIn();
-
+            scope.currentUser = authentication.getCurrentUser();
         }, true);
 
         /* Implementations */
