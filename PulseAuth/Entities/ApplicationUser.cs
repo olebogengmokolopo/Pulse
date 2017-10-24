@@ -34,7 +34,7 @@ namespace PulseAuth.Entities
         public string FullName => FirstName + " " + LastName + " (" + UserName + ")";
         
         [ForeignKey("ApplicationUserId")]
-        public virtual List<TenancyUserRole> TenancyUserRoles { get; set; }
+        public List<TenancyUserRole> TenancyUserRoles { get; set; } = new List<TenancyUserRole>();
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager,
             string authenticationType)

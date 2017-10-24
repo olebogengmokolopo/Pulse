@@ -32,8 +32,14 @@ namespace Monitor.Controllers
             get
             {
                 var identity = User.Identity as ClaimsIdentity;
-                return identity?.Name != null ? applicationUserManager.FindByNameAsync(identity.Name).Result : null;
+                return identity?.Name != null ? AppUserManager.FindByNameAsync(identity.Name).Result : null;
             }
+        }
+
+        protected bool AuthorisedForTenant(int tenantId, string requiredRole)
+        {
+            return CurrentUser.TenancyUserRoles.Exists(
+                tur => tur.Tenancy.TenancyId == tenantId && tur.Role.Name == requiredRole);
         }
 
         protected ApplicationUserManager AppUserManager => applicationUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();

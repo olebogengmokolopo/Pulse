@@ -45,7 +45,7 @@ namespace Monitor.Controllers
 
             var user = CurrentUser;
             
-            return /*errorResult ?? */Ok();
+            return Ok(user);
         }
 
         protected override void Dispose(bool disposing)

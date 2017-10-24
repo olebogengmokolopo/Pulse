@@ -38,11 +38,12 @@
             scope.hasAdminRole = hasRole('Admin');
             scope.hasConfigurationRole = hasRole('Configuration');
             scope.isLoggedIn = authentication.isLoggedIn();
+
             scope.hasIncidentResolversRole = hasRole('IncidentResolvers');
             scope.hasUserRole = hasRole('User');
             var currentUser = localStorageService.get('currentUser');
             if (currentUser) {
-                scope.fullName = currentUser.fullName;
+                scope.currentUser = currentUser.FullName;
             }
         }
 

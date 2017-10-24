@@ -5,9 +5,9 @@
         .module('pulse.authentication.jwt.interceptor', [])
         .factory('jwtAuthInterceptor',JwtAuthInterceptor);
 
-        JwtAuthInterceptor.$inject = ['$q', '$injector', '$location', 'localStorageService', '$rootScope'];
+        JwtAuthInterceptor.$inject = ['$q', '$injector', '$location', 'localStorageService', '$rootScope', 'toaster'];
 
-         function JwtAuthInterceptor($q, $injector, $location, localStorageService, $rootScope) {
+         function JwtAuthInterceptor($q, $injector, $location, localStorageService, $rootScope, toaster) {
 
             var authInterceptorFactory = {
               request: request,

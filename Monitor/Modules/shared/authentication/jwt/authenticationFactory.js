@@ -57,12 +57,10 @@
 
             var deferred = $q.defer();
 
-            var result = $http.post('/api/oauth/token', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
-            console.log(result);
             $http.post('/api/oauth/token', data, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function (response) {
 
                 var isKeySet = localStorageService.set(authorizationDataStorageKey, {
-                    token: response.access_token,
+                    token: response.data.access_token,
                     userName: loginCredentials.userName,
                     refreshToken: '',
                     useRefreshTokens: false

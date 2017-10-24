@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,11 +15,11 @@ namespace PulseAuth.SeedData
             var userManager = new ApplicationUserManager(
                 new UserStore<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole,
                         ApplicationUserClaim>
-                    (new AuthContext()));
+                    (context));
 
             var roleManager =
                 new ApplicationRoleManager(
-                    new RoleStore<ApplicationRole, int, ApplicationUserRole>(new AuthContext()));
+                    new RoleStore<ApplicationRole, int, ApplicationUserRole>(context));
 
             var systemUser = new ApplicationUser
             {
@@ -65,6 +66,22 @@ namespace PulseAuth.SeedData
             userManager.AddToRoles(createdSystemUser.Id, "SuperAdmin", "Admin", "User");
             userManager.AddToRoles(createdAdminUser.Id, "SuperAdmin", "Admin", "User");
             userManager.AddToRoles(createdNormalUser.Id, "User");
+
+            var userRole = roleManager.FindByName("User");
+            var adminRole = roleManager.FindByName("Admin");
+
+            context.Tenancies.Add(new Tenancy() { TenancyName = "Sample Tenant", TenancyDescription = "This is a sample tenant." });
+            context.Tenancies.Add(new Tenancy() { TenancyName = "Other Tenant", TenancyDescription = "This is another sample tenant." });
+
+            var sampleTenancy = context.Tenancies.First(u => u.TenancyName == "Sample Tenancy");
+            var otherTenancy = context.Tenancies.First(u => u.TenancyName == "Other Tenancy");
+
+            userManager.AddToTenant(createdNormalUser, sampleTenancy, userRole);
+            userManager.AddToTenant(createdAdminUser, sampleTenancy, adminRole);
+            userManager.AddToTenant(createdSystemUser, sampleTenancy, adminRole);
+
+            userManager.AddToTenant(createdAdminUser, sampleTenancy, userRole);
+            userManager.AddToTenant(createdSystemUser, sampleTenancy, adminRole);
 
             return createdSystemUser;
         }

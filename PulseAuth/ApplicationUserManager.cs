@@ -14,5 +14,12 @@ namespace PulseAuth
             : base(store)
         {
         }
+
+        public IdentityResult AddToTenant(ApplicationUser user, Tenancy tenant, ApplicationRole role)
+        {
+            user.TenancyUserRoles.Add(new TenancyUserRole(tenant, user, role));
+
+            return this.Update(user);
+        }
     }
 }

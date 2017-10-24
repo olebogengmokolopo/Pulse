@@ -16,11 +16,15 @@
                     warning: 'toast-warning'
                 },
                 messageClass: 'toast-message',
-                positionClass: 'toast-top-right',
+                positionClass: 'toast-bottom-right',
                 tapToDismiss: true,
                 timeOut: 3000,
                 titleClass: 'toast-title',
-                toastClass: 'toast'
+                toastClass: 'toast',
+                templates: {
+                    toast: 'modules/shared/toaster/toast.html',
+                    progressbar: 'directives/progressbar/progressbar.html'
+                }
             });
         });
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Common.Sensors;
@@ -6,16 +7,17 @@ using Common.Sensors;
 namespace Monitor.Controllers
 {
     [RoutePrefix("api/{tenantId}/diskspace")]
-    public class DiskSpaceController : ApiController
+    public class DiskSpaceController : BaseApiController
     {
-        // GET api/values
         [Authorize]
         [Route("", Name = "GetDiskSummaries")]
         [HttpGet]
         [ResponseType(typeof(List<DiskSensorReading>))]
         public IEnumerable<DiskSensorReading> GetDiskSummaries(int tenantId)
         {
-            List<DiskSensorReading> diskSummaries = new List<DiskSensorReading>();
+            var diskSummaries = !AuthorisedForTenant(tenantId, "Tenant")
+                ? null
+                : new List<DiskSensorReading>();
             //using (var context = new PulseContext())
             //{
             //    diskSummaries = context.DiskSensorReadings
@@ -34,7 +36,9 @@ namespace Monitor.Controllers
         [ResponseType(typeof(List<DiskSensorReading>))]
         public IEnumerable<DiskSensorReading> GetDiskHistories(int tenantId, int previousDays = 7)
         {
-            List<DiskSensorReading> diskHistories = new List<DiskSensorReading>();
+            var diskHistories = !AuthorisedForTenant(tenantId, "Tenant") 
+                    ? null
+                    : new List<DiskSensorReading>();
             //using (var context = new PulseContext())
             //{
             //    diskHistories = context.DiskSensorReadings
@@ -48,8 +52,13 @@ namespace Monitor.Controllers
         [Authorize]
         [Route("", Name = "CreateNewDiskReading")]
         [HttpPost]
-        public IHttpActionResult GetDiskHistories(int tenantI, [FromBody]DiskSensorReading diskSensorDto)
+        public IHttpActionResult GetDiskHistories(int tenantId, [FromBody]DiskSensorReading diskSensorDto)
         {
+            if (!AuthorisedForTenant(tenantId, "Tenant"))
+            {
+                return BadRequest();
+            }
+
             //using (var context = new PulseContext())
             //{
             //    context.DiskSensorReadings.Add(diskSensorDto);
