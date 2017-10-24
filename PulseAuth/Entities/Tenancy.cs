@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace PulseAuth.Entities
         [MaxLength(512)]
         public string TenancyDescription { get; set; }
 
-        public virtual List<ApplicationUser> AllowedUsers { get; set; }
+        [ForeignKey("TenancyId")]
+        public virtual List<TenancyUserRole> TenancyUserRoles { get; set; }
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Contexts\AuthContext.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Tenancy.cs" />
+    <Compile Include="Entities\TenancyUserRole.cs" />
     <Compile Include="Migrations\201708261236038_Initial.cs" />
     <Compile Include="Migrations\201708261236038_Initial.Designer.cs">
       <DependentUpon>201708261236038_Initial.cs</DependentUpon>
@@ -92,6 +93,10 @@
     <Compile Include="Migrations\201708291849298_AddedTenancyEntities.cs" />
     <Compile Include="Migrations\201708291849298_AddedTenancyEntities.Designer.cs">
       <DependentUpon>201708291849298_AddedTenancyEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710121431573_AdjustedUserRoleToIncludeTenancy.cs" />
+    <Compile Include="Migrations\201710121431573_AdjustedUserRoleToIncludeTenancy.Designer.cs">
+      <DependentUpon>201710121431573_AdjustedUserRoleToIncludeTenancy.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -112,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708291849298_AddedTenancyEntities.resx">
       <DependentUpon>201708291849298_AddedTenancyEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710121431573_AdjustedUserRoleToIncludeTenancy.resx">
+      <DependentUpon>201710121431573_AdjustedUserRoleToIncludeTenancy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
