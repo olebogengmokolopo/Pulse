@@ -18,6 +18,7 @@ namespace Monitor.Controllers
         private readonly ApplicationUserManager applicationUserManager = null;
         protected readonly AuthContext AuthContext;
 
+
         public BaseApiController(AuthContext authContext)
         {
             AuthContext = authContext;
@@ -38,8 +39,13 @@ namespace Monitor.Controllers
 
         protected bool AuthorisedForTenant(int tenantId, string requiredRole)
         {
-            return CurrentUser.TenancyUserRoles.Exists(
-                tur => tur.Tenancy.TenancyId == tenantId && tur.Role.Name == requiredRole);
+            return CurrentUser?.TenancyUserRoles.Exists(
+                       tur => tur.Tenancy.TenancyId == tenantId && tur.Role.Name == requiredRole) ?? false;
+        }
+
+        protected bool AuthorisedAsTenant()
+        {
+            return CurrentUser?.IsTenant ?? false;
         }
 
         protected ApplicationUserManager AppUserManager => applicationUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();

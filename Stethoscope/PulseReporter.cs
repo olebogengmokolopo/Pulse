@@ -1,22 +1,45 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
 using Common.Sensors;
+using Newtonsoft.Json;
 
 namespace Stethoscope
 {
+    [Serializable]
+    internal struct Jwt
+    {
+        [JsonProperty("access_token")]
+        internal string AccessToken;
+        [JsonProperty("token_type")]
+        internal string TokenType;
+        [JsonProperty("expires_in")]
+        internal int ExpiresIn;
+    }
+
     public class PulseReporter : IReporter
     {
+        private readonly string _tenantName;
         private readonly string _pulseServerAddress;
         private static readonly HttpClient HttpClient = new HttpClient();
 
-        public PulseReporter(string pulseServerAddress)
+        private string authToken;
+        private DateTime tokenExpiresAt;
+
+        public PulseReporter(string pulseServerAddress, string tenantName)
         {
-            HttpClient.BaseAddress = new Uri(pulseServerAddress);
+            var tenantId = tenantName;
+
+            HttpClient.BaseAddress = new Uri(pulseServerAddress + $@"api");
+            RefreshAuthenticationToken();
         }
 
-        public async void Report<T>(T reading) where T : ISensorReading
+        public void Report<T>(T reading) where T : ISensorReading
         {
             HttpClient.DefaultRequestHeaders.Accept.Clear();
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -24,16 +47,40 @@ namespace Stethoscope
             HttpClient.DefaultRequestHeaders.Authorization = GetAuthenticationHeader();
 
             var readingTarget = reading.GetSensorTarget();
-            var response = await HttpClient.PostAsJsonAsync(readingTarget, reading);
+            var response = HttpClient.PostAsJsonAsync(readingTarget, reading).Result;
+            Console.WriteLine(response.Content);
             response.EnsureSuccessStatusCode();
+        }
+
+        private void RefreshAuthenticationToken()
+        {
+            HttpClient.DefaultRequestHeaders.Accept.Clear();
+            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+            var formUrlEncodedContent = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("grant_type", "password"),
+                    new KeyValuePair<string, string>("username", "TestTenant"),
+                    new KeyValuePair<string, string>("password", "Test1234!")
+                });
+
+            var response = HttpClient.PostAsync("/api/oauth/token", formUrlEncodedContent).Result;
+            var resultJson = response.Content.ReadAsStringAsync().Result;
+            response.EnsureSuccessStatusCode();
+            var deserializedJwt = JsonConvert.DeserializeObject<Jwt>(resultJson);
+            authToken = deserializedJwt.AccessToken;
+            tokenExpiresAt = DateTime.Now.AddSeconds(deserializedJwt.ExpiresIn);
+            
         }
 
         private AuthenticationHeaderValue GetAuthenticationHeader()
         {
-            var authenticationData = "grant_type=password&username=&password=";
+            if (tokenExpiresAt < DateTime.Now)
+            {
+                RefreshAuthenticationToken();
+            }
 
-            var authenticationBytes = Encoding.ASCII.GetBytes(authenticationData);
-            return new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authenticationBytes));
+            return new AuthenticationHeaderValue("Bearer", authToken);
         }
     }
 }

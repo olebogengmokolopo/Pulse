@@ -30,6 +30,8 @@ namespace PulseAuth.Entities
             ApplicationUser = user;
             Tenancy = tenant;
             Role = role;
+            user.TenancyUserRoles.Add(this);
+            tenant.TenancyUserRoles.Add(this);
         }
     }
 }

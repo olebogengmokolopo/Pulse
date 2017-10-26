@@ -232,8 +232,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\DiskSpaceController.cs" />
+    <Compile Include="Mappings\DiskSensorReadingMapping.cs" />
+    <Compile Include="Migrations\201710260155102_Initial.cs" />
+    <Compile Include="Migrations\201710260155102_Initial.Designer.cs">
+      <DependentUpon>201710260155102_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Contexts\PulseWebContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.spec.js" />
@@ -434,6 +441,11 @@
       <Project>{8a3ba383-55e8-46b5-88df-043351cde187}</Project>
       <Name>PulseAuth</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710260155102_Initial.resx">
+      <DependentUpon>201710260155102_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

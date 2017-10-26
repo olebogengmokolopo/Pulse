@@ -13,7 +13,9 @@ namespace PulseAuth.Mappings
         public static void Map(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ApplicationUser>()
-                .HasMany(u => u.TenancyUserRoles);
+                .HasMany(u => u.TenancyUserRoles)
+                .WithOptional();
+
         }
     }
 }

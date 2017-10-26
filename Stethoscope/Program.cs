@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Common;
 using Common.Sensors;
 using Stethoscope.Sensors;
@@ -14,13 +15,16 @@ namespace Stethoscope
 
         public static void Main()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["sensorTargetConnection"].ConnectionString;
+            var connectionString = ConfigurationManager.ConnectionStrings["SensorTargetConnection"].ConnectionString;
             var reporterTargetBaseUri = ConfigurationManager.AppSettings["ReporterTargetBaseUri"];
+            var tenantName = ConfigurationManager.AppSettings["TenantName"];
             var delayInSeconds = int.Parse(ConfigurationManager.AppSettings["PollerDelayInSeconds"]);
+
+            Console.WriteLine("Launched!");
 
             _connectionManager = new SqlConnectionManager(connectionString);
 
-            _reporter = new PulseReporter(reporterTargetBaseUri);
+            _reporter = new PulseReporter(reporterTargetBaseUri, tenantName);
             _sensor = new DiskSpaceSensor(_connectionManager);
             _diskSpacePoller = new SensorPoller<DiskSensorReading>(_sensor, _reporter, delayInSeconds);
 

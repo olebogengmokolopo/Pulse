@@ -12,7 +12,7 @@ namespace Stethoscope.Sensors
 
         public override IEnumerable<DiskSensorReading> MakeReading()
         {
-            var procedureResult = ConnectionManager.ExecuteStoredProcWithReader("Sensors.ReadDiskSpace");
+            var procedureResult = ConnectionManager.ExecuteStoredProcWithReader("[Sensors].[ReadDiskSpace]");
             var readings = DiskSensorReading.FromDataReader(procedureResult.DataReader);
 
             return readings;

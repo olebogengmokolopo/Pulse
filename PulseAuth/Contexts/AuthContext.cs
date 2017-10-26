@@ -33,9 +33,10 @@ namespace PulseAuth.Contexts
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            ApplicationUserMapping.Map(modelBuilder);
             TenancyMapping.Map(modelBuilder);
             TenancyUserRoleMapping.Map(modelBuilder);
-            ApplicationUserMapping.Map(modelBuilder);
+            
         }
     }
 }

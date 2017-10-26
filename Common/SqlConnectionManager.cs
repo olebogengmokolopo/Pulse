@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Common
         {
             _connectionString = connectionString;
             _connection = PrepareConnection();
+            Connect();
         }
 
         private SqlConnection PrepareConnection()
@@ -30,15 +32,16 @@ namespace Common
             _connection.Open();
         }
 
-        public SqlProcedureResult ExecuteStoredProcWithReader(string targetStoredProcedure, List<SqlParameter> parameters = null)
+        public SqlProcedureResult ExecuteStoredProcWithReader(string targetStoredProcedure, params SqlParameter[] parameters)
         {
             var cmd = new SqlCommand(targetStoredProcedure, _connection) { CommandType = CommandType.StoredProcedure };
-            cmd.Parameters.AddRange(parameters?.ToArray());
+            cmd.Parameters.AddRange(parameters);
+            _connection.FireInfoMessageEventOnUserErrors = true;
 
             var reader = cmd.ExecuteReader();
-            var outParameters = parameters?.Where(p =>
+            var outParameters = parameters.Where(p =>
                 p.Direction == ParameterDirection.Output || p.Direction == ParameterDirection.InputOutput).ToList();
-            
+
             return new SqlProcedureResult(outParameters, reader);
         }
     }

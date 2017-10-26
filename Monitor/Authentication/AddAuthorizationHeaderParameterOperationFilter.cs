@@ -20,21 +20,19 @@ namespace Monitor.Authentication
 
 	        var allowAnonymous = apiDescription.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any();
 
-	        if (isAuthorized && !allowAnonymous)
+	        if (!isAuthorized || allowAnonymous) return;
+	        if (operation.parameters == null)
 	        {
-	            if (operation.parameters == null)
-	            {
-	                operation.parameters = new List<Parameter>();
-	            }
-				operation.parameters.Add(new Parameter
-				{
-				    name = "Authorization",
-					@in = "header",
-					description = "Access Token",
-					required = true,
-					type = "string"
-				});
+	            operation.parameters = new List<Parameter>();
 	        }
+	        operation.parameters.Add(new Parameter
+	        {
+	            name = "Authorization",
+	            @in = "header",
+	            description = "Access Token",
+	            required = true,
+	            type = "string"
+	        });
 	    }
 	}
 }

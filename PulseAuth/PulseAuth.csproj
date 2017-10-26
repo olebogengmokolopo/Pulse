@@ -118,6 +118,10 @@
     <Compile Include="Migrations\201710241859515_Test.Designer.cs">
       <DependentUpon>201710241859515_Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710260254003_Test2.cs" />
+    <Compile Include="Migrations\201710260254003_Test2.Designer.cs">
+      <DependentUpon>201710260254003_Test2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710241859515_Test.resx">
       <DependentUpon>201710241859515_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710260254003_Test2.resx">
+      <DependentUpon>201710260254003_Test2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

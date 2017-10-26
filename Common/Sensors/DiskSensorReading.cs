@@ -1,35 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 
 namespace Common.Sensors
 {
     public class DiskSensorReading : ISensorReading
     {
-        public int TenantKey { get; }
-        public DateTime Timestamp { get; }
-        public string Label { get; }
-        public string Volume { get; }
-        public float AvailableSpace { get; }
-        public float TotalSpace { get; }
-        public float UsedSpace { get; }
+        public int Id { get; set; } = 0;
+        public int TenantId { get; set; }
+        public DateTime Timestamp { get; set; }
+        public string Label { get; set; }
+        public string Volume { get; set; }
+        public float AvailableSpace { get; set; }
+        public float TotalSpace { get; set; }
+        public float UsedSpace { get; set; }
 
-        public string SensorTarget;
+        public string SensorTarget = "/diskspace";
         public string GetSensorTarget()
         {
             return SensorTarget;
         }
 
+        public DiskSensorReading()
+        {
+            
+        }
+
         public DiskSensorReading(DateTime timestamp, string label, string volume, float totalSpace, float availableSpace)
         {
-            TenantKey = 1;
+            TenantId = 1;
             Timestamp = timestamp;
             Label = label;
             Volume = volume;
             AvailableSpace = availableSpace;
             TotalSpace = totalSpace;
-            UsedSpace = totalSpace - availableSpace;
+            CalculateUsedSpace();
         }
+
+        public void CalculateUsedSpace()
+        {
+            UsedSpace = TotalSpace - AvailableSpace;
+        }
+
         public static IEnumerable<DiskSensorReading> FromDataReader(DbDataReader dataReader)
         {
             var sensorReadings = new List<DiskSensorReading>();
@@ -37,13 +50,15 @@ namespace Common.Sensors
             while (dataReader.Read())
             {
                 var timestamp = (DateTime)dataReader["Timestamp"];
-                var label = dataReader["Label"].ToString();
                 var volume = dataReader["Volume"].ToString();
-                var availableSpace = (float)dataReader["AvailableSpace"];
-                var totalSpace = (float)dataReader["TotalSpace"];
+                var label = dataReader["Label"].ToString();
+                var availableSpace = (float)(long)dataReader["AvailableSpace"];
+                var totalSpace = (float)(long)dataReader["TotalSpace"];
 
                 sensorReadings.Add(new DiskSensorReading(timestamp, label, volume, totalSpace, availableSpace));
             }
+
+            dataReader.Close();
 
             return sensorReadings;
         }

@@ -1,21 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.ModelBinding;
 using Common.Sensors;
+using Monitor.Contexts;
 
 namespace Monitor.Controllers
 {
-    [RoutePrefix("api/{tenantId}/diskspace")]
+    [RoutePrefix("diskspace")]
     public class DiskSpaceController : BaseApiController
     {
         [Authorize]
         [Route("", Name = "GetDiskSummaries")]
         [HttpGet]
         [ResponseType(typeof(List<DiskSensorReading>))]
-        public IEnumerable<DiskSensorReading> GetDiskSummaries(int tenantId)
+        public IEnumerable<DiskSensorReading> GetDiskSummaries([FromBody]int tenantId)
         {
-            var diskSummaries = !AuthorisedForTenant(tenantId, "Tenant")
+            var diskSummaries = !AuthorisedForTenant(tenantId, "User")
                 ? null
                 : new List<DiskSensorReading>();
             //using (var context = new PulseContext())
@@ -34,9 +38,9 @@ namespace Monitor.Controllers
         [Route("history", Name = "GetDiskHistories")]
         [HttpGet]
         [ResponseType(typeof(List<DiskSensorReading>))]
-        public IEnumerable<DiskSensorReading> GetDiskHistories(int tenantId, int previousDays = 7)
+        public IEnumerable<DiskSensorReading> GetDiskHistories([FromBody]int tenantId, int previousDays = 7)
         {
-            var diskHistories = !AuthorisedForTenant(tenantId, "Tenant") 
+            var diskHistories = !AuthorisedForTenant(tenantId, "User") 
                     ? null
                     : new List<DiskSensorReading>();
             //using (var context = new PulseContext())
@@ -49,21 +53,26 @@ namespace Monitor.Controllers
             return diskHistories;
         }
 
-        [Authorize]
+        [Authorize(Roles="Tenant")]
         [Route("", Name = "CreateNewDiskReading")]
         [HttpPost]
-        public IHttpActionResult GetDiskHistories(int tenantId, [FromBody]DiskSensorReading diskSensorDto)
+        public IHttpActionResult CreateNewDiskReading([FromBody]DiskSensorReading diskSensorDto)
         {
-            if (!AuthorisedForTenant(tenantId, "Tenant"))
+            Debug.WriteLine(CurrentUser.IsTenant.ToString());
+            Debug.WriteLine(AuthorisedAsTenant().ToString());
+            Debug.WriteLine(CurrentUser.TenancyUserRoles.Count.ToString());
+
+            if (!CurrentUser.IsTenant) return BadRequest();
+            if (!AuthorisedAsTenant()) return Unauthorized();
+
+            diskSensorDto.TenantId = CurrentUser.TenancyUserRoles.Single().TenancyId;
+            diskSensorDto.CalculateUsedSpace();
+            using (var context = new PulseWebContext())
             {
-                return BadRequest();
+                context.DiskSensorReadings.Add(diskSensorDto);
+                context.SaveChanges();
             }
 
-            //using (var context = new PulseContext())
-            //{
-            //    context.DiskSensorReadings.Add(diskSensorDto);
-            //    context.SaveChanges();
-            //}
             return Ok();
         }
     }

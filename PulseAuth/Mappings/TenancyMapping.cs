@@ -27,6 +27,10 @@ namespace PulseAuth.Mappings
             modelBuilder.Entity<Tenancy>()
                 .Property(u => u.TenancyDescription)
                 .IsOptional();
+
+            modelBuilder.Entity<Tenancy>()
+                .HasMany(u => u.TenancyUserRoles)
+                .WithOptional();
         }
     }
 }

@@ -15,11 +15,9 @@ namespace PulseAuth.Migrations
         protected override void Seed(Contexts.AuthContext context)
         {
             var systemUser = context.Set<ApplicationUser>().SingleOrDefault(x => x.UserName == "SystemUser");
-            if (systemUser == null)
-            {
-                systemUser = UserSeedData.Create(context);
-                context.SaveChanges();
-            }
+            if (systemUser != null) return;
+            systemUser = UserSeedData.Create(context).Result;
+            context.SaveChanges();
         }
     }
 }
