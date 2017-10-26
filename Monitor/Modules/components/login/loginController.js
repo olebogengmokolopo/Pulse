@@ -5,9 +5,9 @@
         .module('pulse.login.controllers')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$location', '$timeout', 'authentication', '$rootScope'];
+    LoginController.$inject = ['$scope', '$state', '$location', '$timeout', 'authentication', '$rootScope'];
 
-    function LoginController($scope, $location, $timeout, Authentication, $rootScope) {
+    function LoginController($scope, $state, $location, $timeout, Authentication, $rootScope) {
 
         $scope.loginData = {
             userName: "",
@@ -20,8 +20,8 @@
             console.log($scope.loginData.userName);
             console.log($scope.loginData.password);
             Authentication.login($scope.loginData).then(function (response) {
+                    $state.go('health');
                     $rootScope.$broadcast('userLoggedInStatusChangedReloadNavBar');
-                    $location.path('/health');
                 },
                 function (err) {
                     $scope.message = err.error_description;

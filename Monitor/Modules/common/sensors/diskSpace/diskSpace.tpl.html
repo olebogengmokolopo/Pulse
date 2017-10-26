@@ -6,15 +6,15 @@
         <div class="panel-body">
             <div class="row" ng-repeat="drive in ctrl.drives track by $index">
                 <h5>
-                    <div class="col-xs-1">{{drive.volume}}</div>
-                    <div class="col-xs-5">{{drive.label}}</div>
+                    <div class="col-xs-1">{{drive.Volume}}</div>
+                    <div class="col-xs-5">{{drive.Label}}</div>
                 </h5>
-                <div class="col-xs-3 text-right">{{drive.totalSpace}}GB</div>
-                <div class="col-xs-3 text-right">{{drive.freeSpace}}GB</div>
+                <div class="col-xs-3 text-right">{{(drive.TotalSpace / 1024).toFixed()}} GB</div>
+                <div class="col-xs-3 text-right">{{(drive.AvailableSpace / 1024).toFixed()}} GB</div>
                 <div class="col-xs-12">
-                    <uib-progress class="progress-striped" max="drive.totalSpace">
-                        <uib-bar value="drive.usedSpace" type="{{drive.alertType}}">{{drive.usedSpace}}GB</uib-bar>
-                        <uib-bar value="drive.freeSpace" type="default">{{drive.freeSpace}}GB</uib-bar>
+                    <uib-progress class="progress-striped" max="drive.TotalSpace">
+                        <uib-bar value="drive.UsedSpace" type="{{drive.AlertType == undefined ? 'success' : drive.AlertType}}">{{(drive.UsedSpace / 1024).toFixed()}} GB</uib-bar>
+                        <uib-bar value="drive.AvailableSpace" type="default">{{(drive.AvailableSpace / 1024).toFixed()}} GB</uib-bar>
                     </uib-progress>
                 </div>
             </div>

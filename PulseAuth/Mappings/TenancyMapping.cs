@@ -13,24 +13,6 @@ namespace PulseAuth.Mappings
     {
         public static void Map(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Tenancy>()
-                .HasKey(u => u.TenancyId);
-
-            modelBuilder.Entity<Tenancy>()
-                .Property(u => u.TenancyId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-            modelBuilder.Entity<Tenancy>()
-                .Property(u => u.TenancyName)
-                .IsRequired();
-
-            modelBuilder.Entity<Tenancy>()
-                .Property(u => u.TenancyDescription)
-                .IsOptional();
-
-            modelBuilder.Entity<Tenancy>()
-                .HasMany(u => u.TenancyUserRoles)
-                .WithOptional();
         }
     }
 }

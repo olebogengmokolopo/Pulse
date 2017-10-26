@@ -7,13 +7,13 @@ namespace PulseAuth.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Test2 : IMigrationMetadata
+    public sealed partial class test : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Test2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(test));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710260254003_Test2"; }
+            get { return "201710262002388_test"; }
         }
         
         string IMigrationMetadata.Source

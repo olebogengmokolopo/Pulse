@@ -4,7 +4,7 @@
 	.provider('resourceConfig', function resourceConfigProvider() {
 		this.config ={
 			serverBase: 'http://pulse.local/',
-			debug: true
+			debug: false
 		};
 
 		this.$get = function (){

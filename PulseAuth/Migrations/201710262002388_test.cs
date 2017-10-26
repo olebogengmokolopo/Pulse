@@ -3,7 +3,7 @@ namespace PulseAuth.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Test : DbMigration
+    public partial class test : DbMigration
     {
         public override void Up()
         {
@@ -11,12 +11,14 @@ namespace PulseAuth.Migrations
             DropIndex("dbo.TenancyUserRoles", new[] { "Role_Id" });
             AlterColumn("dbo.TenancyUserRoles", "Role_Id", c => c.Int(nullable: false));
             CreateIndex("dbo.TenancyUserRoles", "Role_Id");
+            AddForeignKey("dbo.TenancyUserRoles", "ApplicationUserId", "dbo.AspNetUsers", "Id", cascadeDelete: true);
             AddForeignKey("dbo.TenancyUserRoles", "Role_Id", "dbo.AspNetRoles", "Id", cascadeDelete: true);
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.TenancyUserRoles", "Role_Id", "dbo.AspNetRoles");
+            DropForeignKey("dbo.TenancyUserRoles", "ApplicationUserId", "dbo.AspNetUsers");
             DropIndex("dbo.TenancyUserRoles", new[] { "Role_Id" });
             AlterColumn("dbo.TenancyUserRoles", "Role_Id", c => c.Int());
             CreateIndex("dbo.TenancyUserRoles", "Role_Id");

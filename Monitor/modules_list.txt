@@ -24,7 +24,7 @@
 ./Modules/common/authentication/jwt/jwt.config.js
 ./Modules/common/authentication/jwt/jwt.module.js
 ./Modules/common/authentication/jwt/services/authenticationFactory.js
-./Modules/common/authentication/jwt/services/jwtDecodeFacotry.js
+./Modules/common/authentication/jwt/services/jwtDecodeFactory.js
 ./Modules/common/authentication/jwt/services/jwtHttpInterceptorFactory.js
 ./Modules/common/authentication/jwt/tests/jwtDecode.spec.js
 ./Modules/common/common.module.js

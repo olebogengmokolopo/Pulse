@@ -13,14 +13,8 @@ namespace PulseAuth.Mappings
     {
         public static void Map(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TenancyUserRole>()
-                .HasKey(u => new { u.TenancyId, u.ApplicationUserId});
-
-            modelBuilder.Entity<TenancyUserRole>()
-                .HasRequired(u => u.ApplicationUser);
-
-            modelBuilder.Entity<TenancyUserRole>()
-                .HasRequired(u => u.Tenancy);
+        //    modelBuilder.Entity<TenancyUserRole>()
+        //        .HasKey(u => new { u.Tenancy, u.ApplicationUser});
 
             modelBuilder.Entity<TenancyUserRole>()
                 .HasRequired(u => u.Role);

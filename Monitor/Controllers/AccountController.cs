@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Common.Models;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using PulseAuth.Repositories;
 
 namespace Monitor.Controllers
@@ -36,7 +37,7 @@ namespace Monitor.Controllers
         [Authorize]
         [HttpGet]
         [Route("user", Name = "GetCurrentUser")]
-        public async Task<IHttpActionResult> GetCurrentUser()
+        public IHttpActionResult GetCurrentUser()
         {
             if (!ModelState.IsValid)
             {

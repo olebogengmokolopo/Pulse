@@ -33,10 +33,10 @@ namespace PulseAuth.Entities
         public string LastName { get; set; }
             
         public string FullName => FirstName + " " + LastName + " (" + UserName + ")";
-
         public bool IsTenant => TenancyUserRoles.Any(r => r.Role.Name == "Tenant");
         public bool IsNotTenant => TenancyUserRoles.All(r => r.Role.Name != "Tenant") && TenancyUserRoles.Count != 0;
 
+        [Required]
         [ForeignKey("ApplicationUserId")]
         public virtual List<TenancyUserRole> TenancyUserRoles { get; set; } = new List<TenancyUserRole>();
 

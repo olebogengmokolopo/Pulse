@@ -14,31 +14,31 @@ namespace Monitor.Controllers
     public class DiskSpaceController : BaseApiController
     {
         [Authorize]
-        [Route("", Name = "GetDiskSummaries")]
+        [Route("{tenantId}", Name = "GetDiskSummaries")]
         [HttpGet]
         [ResponseType(typeof(List<DiskSensorReading>))]
-        public IEnumerable<DiskSensorReading> GetDiskSummaries([FromBody]int tenantId)
+        public IEnumerable<DiskSensorReading> GetDiskSummaries(int tenantId)
         {
             var diskSummaries = !AuthorisedForTenant(tenantId, "User")
                 ? null
                 : new List<DiskSensorReading>();
-            //using (var context = new PulseContext())
-            //{
-            //    diskSummaries = context.DiskSensorReadings
-            //        .Select(r => r)
-            //        .GroupBy(r => r.Volume)
-            //        .Select(g => g.OrderByDescending(r => r.Timestamp).First())
-            //        .Select(r => new DiskSensorReading(r.Timestamp, r.Label, r.Volume, r.TotalSpace, r.AvailableSpace))
-            //        .ToList();
-            //}
+            using (var context = new PulseWebContext())
+            {
+                diskSummaries = context.DiskSensorReadings
+                    .Where(r => r.TenantId == tenantId)
+                    .GroupBy(r => r.Volume)
+                    .Select(g => g.OrderByDescending(r => r.Timestamp).FirstOrDefault())
+                    
+                    .ToList();
+            }
             return diskSummaries;
         }
 
         [Authorize]
-        [Route("history", Name = "GetDiskHistories")]
+        [Route("{tenantId}/history", Name = "GetDiskHistories")]
         [HttpGet]
         [ResponseType(typeof(List<DiskSensorReading>))]
-        public IEnumerable<DiskSensorReading> GetDiskHistories([FromBody]int tenantId, int previousDays = 7)
+        public IEnumerable<DiskSensorReading> GetDiskHistories(int tenantId, int previousDays = 7)
         {
             var diskHistories = !AuthorisedForTenant(tenantId, "User") 
                     ? null

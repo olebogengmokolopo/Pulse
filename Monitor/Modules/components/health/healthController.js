@@ -12,5 +12,7 @@
 
         /* IMPLEMENTATIONS */
         scope.environment = appEnvironment.environment;
+        console.log(scope.currentUser);
+        //scope.currentTenant = scope.currentUser.
     }
 })();

@@ -114,13 +114,9 @@
     <Compile Include="Migrations\201710121431573_AdjustedUserRoleToIncludeTenancy.Designer.cs">
       <DependentUpon>201710121431573_AdjustedUserRoleToIncludeTenancy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710241859515_Test.cs" />
-    <Compile Include="Migrations\201710241859515_Test.Designer.cs">
-      <DependentUpon>201710241859515_Test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710260254003_Test2.cs" />
-    <Compile Include="Migrations\201710260254003_Test2.Designer.cs">
-      <DependentUpon>201710260254003_Test2.cs</DependentUpon>
+    <Compile Include="Migrations\201710262002388_test.cs" />
+    <Compile Include="Migrations\201710262002388_test.Designer.cs">
+      <DependentUpon>201710262002388_test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
@@ -146,11 +142,8 @@
     <EmbeddedResource Include="Migrations\201710121431573_AdjustedUserRoleToIncludeTenancy.resx">
       <DependentUpon>201710121431573_AdjustedUserRoleToIncludeTenancy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710241859515_Test.resx">
-      <DependentUpon>201710241859515_Test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710260254003_Test2.resx">
-      <DependentUpon>201710260254003_Test2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710262002388_test.resx">
+      <DependentUpon>201710262002388_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

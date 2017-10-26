@@ -1,4 +1,4 @@
-CREATE PROCEDURE [Sensors].[ReadDiskSpace]
+ALTER PROCEDURE [Sensors].[ReadDiskSpace]
 AS
     BEGIN
         SET NOCOUNT ON;
@@ -7,8 +7,8 @@ AS
             GETDATE() AS Timestamp
           , [Volume_Mount_Point] AS Volume
 		, [Logical_Volume_Name] AS Label
-          , [Total_Bytes] / (1024 * 1024 * 1024) AS TotalSpace
-          , [Available_Bytes] / (1024 * 1024 * 1024) AS AvailableSpace
+          , [Total_Bytes] / (1024 * 1024) AS TotalSpace
+          , [Available_Bytes] / (1024 * 1024) AS AvailableSpace
         FROM
             [Sys].[Master_Files] AS [F]
             CROSS APPLY [Sys].[Dm_Os_Volume_Stats]([F].[Database_Id], [F].File_Id)
@@ -20,4 +20,3 @@ AS
 	   RETURN;
     END;
 GO
-

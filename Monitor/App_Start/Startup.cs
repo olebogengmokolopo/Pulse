@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using Owin;
 using Pulse;
 using PulseAuth.Providers;
@@ -15,6 +16,9 @@ namespace Monitor
 
         public void Configuration(IAppBuilder app)
         {
+
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
             HttpConfiguration = new HttpConfiguration();
 
             SwaggerConfig.Register(HttpConfiguration);
