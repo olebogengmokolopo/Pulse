@@ -13,7 +13,7 @@
                 <div class="col-xs-3 text-right">{{(drive.AvailableSpace / 1024).toFixed()}} GB</div>
                 <div class="col-xs-12">
                     <uib-progress class="progress-striped" max="drive.TotalSpace">
-                        <uib-bar value="drive.UsedSpace" type="{{drive.AlertType == undefined ? 'success' : drive.AlertType}}">{{(drive.UsedSpace / 1024).toFixed()}} GB</uib-bar>
+                        <uib-bar value="drive.UsedSpace" type="{{drive.AlertType == undefined ? 'info' : drive.AlertType}}">{{(drive.UsedSpace / 1024).toFixed()}} GB</uib-bar>
                         <uib-bar value="drive.AvailableSpace" type="default">{{(drive.AvailableSpace / 1024).toFixed()}} GB</uib-bar>
                     </uib-progress>
                 </div>

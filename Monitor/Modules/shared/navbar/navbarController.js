@@ -11,6 +11,8 @@
 
         var scope = this;
         scope.logout = logout;
+        scope.gotoHealth = gotoHealth;
+        scope.switchTenancy = switchTenancy;
 
         scope.authentication = {};
         setupUser();
@@ -42,8 +44,14 @@
             scope.hasIncidentResolversRole = hasRole('IncidentResolvers');
             scope.hasUserRole = hasRole('User');
             var currentUser = localStorageService.get('currentUser');
+
             if (currentUser) {
+                scope.currentTenancy = currentUser.TenancyUserRoles[0].Tenancy;
+                scope.availableTenancies = currentUser.TenancyUserRoles.map(function (tenancyUserRole) {
+                    return tenancyUserRole.Tenancy;
+                });
                 scope.currentUser = currentUser.FullName;
+                console.log(scope.availableTenancies);
             }
         }
 
@@ -54,6 +62,25 @@
             });
             getRoles();
             setupUser();
+        }
+
+        function gotoHealth(){
+            var params = {
+                tenancyId: scope.currentTenancy.TenancyId
+            };
+            $state.go('health', params);
+        }
+
+        function switchTenancy(tenancyIndex){
+
+            var currentUser = localStorageService.get('currentUser');
+            scope.currentTenancy = currentUser.TenancyUserRoles[tenancyIndex].Tenancy;
+
+            console.log(tenancyIndex);
+            console.log(scope.currentTenancy);
+
+            $state.params.tenancyId = scope.currentTenancy.TenancyId;
+            $state.reload( );
         }
     }
 })();

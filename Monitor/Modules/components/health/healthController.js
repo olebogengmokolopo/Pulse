@@ -5,14 +5,13 @@
         .module('pulse.health.controllers')
         .controller('HealthController', HealthController);
 
-    HealthController.$inject = ['$log', 'appEnvironment', 'toaster'];
+    HealthController.$inject = ['$log', 'appEnvironment', 'toaster', '$stateParams'];
 
-    function HealthController($log, appEnvironment, toaster) {
+    function HealthController($log, appEnvironment, toaster, $stateParams) {
         var scope = this;
 
         /* IMPLEMENTATIONS */
         scope.environment = appEnvironment.environment;
-        console.log(scope.currentUser);
-        //scope.currentTenant = scope.currentUser.
+        scope.currentTenancyId = $stateParams.tenancyId;
     }
 })();

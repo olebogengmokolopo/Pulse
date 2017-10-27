@@ -43,8 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTransferObjects\TenancyDto.cs" />
-    <Compile Include="DataTransferObjects\UserModelDto.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="SqlProcedureResult.cs" />
     <Compile Include="SqlConnectionManager.cs" />

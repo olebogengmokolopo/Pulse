@@ -3,7 +3,6 @@
  */
 (function () {
     'use strict';
-
     angular
         .module('pulse.sensors.diskSpace')
         .directive('diskSpace', diskSpace);
@@ -15,17 +14,14 @@
             controllerAs: 'diskSpace',
             templateUrl: 'modules/common/sensors/diskSpace/diskSpace.tpl.html',
             restrict: 'E',
-            replace: true
+            replace: true,
+            scope: false
         };
 
         DiskSpaceController.$inject = ['$log'];
 
         function DiskSpaceController($log) {
-
             var scope = this;
-
-            /* IMPLEMENTATIONS */
-
         }
 
         return directive;

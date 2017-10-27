@@ -32,11 +32,12 @@ namespace Stethoscope
                 try
                 {
                     Poll();
+                    _logger.Info($"Sensor polling: {_sensor.GetType()}");
                     Thread.Sleep(_delayInSeconds * 1000);
                 }
                 catch (Exception e)
                 {
-                    _logger.Error("Sensor Exception occurred for: " + _sensor.GetType());
+                    _logger.Error("Sensor Exception occurred for: {_sensor.GetType()}");
                     _logger.Error(e);
                     Stop();
                 }
@@ -55,7 +56,7 @@ namespace Stethoscope
             {
                 _reporter.Report(reading);
             }
-            _logger.Info("Sensor reading reported for: " + _sensor.GetType());
+            _logger.Info(@"Sensor reading reported for: {_sensor.GetType()}");
         }
     }
 }

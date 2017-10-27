@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
-using System.Text;
 using Common.Sensors;
 using Newtonsoft.Json;
+using System.Configuration;
 
 namespace Stethoscope
 {
@@ -31,10 +28,8 @@ namespace Stethoscope
         private string authToken;
         private DateTime tokenExpiresAt;
 
-        public PulseReporter(string pulseServerAddress, string tenantName)
+        public PulseReporter(string pulseServerAddress)
         {
-            var tenantId = tenantName;
-
             HttpClient.BaseAddress = new Uri(pulseServerAddress + $@"api");
             RefreshAuthenticationToken();
         }
@@ -48,7 +43,7 @@ namespace Stethoscope
 
             var readingTarget = reading.GetSensorTarget();
             var response = HttpClient.PostAsJsonAsync(readingTarget, reading).Result;
-            Console.WriteLine(response.Content);
+
             response.EnsureSuccessStatusCode();
         }
 
@@ -57,11 +52,14 @@ namespace Stethoscope
             HttpClient.DefaultRequestHeaders.Accept.Clear();
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
+            var username = ConfigurationManager.AppSettings["TenantUsername"];
+            var password = ConfigurationManager.AppSettings["TenantPassword"];
+
             var formUrlEncodedContent = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("grant_type", "password"),
-                    new KeyValuePair<string, string>("username", "TestTenant"),
-                    new KeyValuePair<string, string>("password", "Test1234!")
+                    new KeyValuePair<string, string>("username", username),
+                    new KeyValuePair<string, string>("password", password)
                 });
 
             var response = HttpClient.PostAsync("/api/oauth/token", formUrlEncodedContent).Result;

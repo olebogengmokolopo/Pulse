@@ -36,7 +36,6 @@ namespace Common
         {
             var cmd = new SqlCommand(targetStoredProcedure, _connection) { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.AddRange(parameters);
-            _connection.FireInfoMessageEventOnUserErrors = true;
 
             var reader = cmd.ExecuteReader();
             var outParameters = parameters.Where(p =>

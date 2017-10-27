@@ -5,18 +5,18 @@
         .module('pulse.sensors.diskSpace.controllers')
         .controller('DiskSpaceController', DiskSpaceController);
 
-    DiskSpaceController.$inject = ['$log', 'appEnvironment', 'toaster', 'DiskSpace'];
+    DiskSpaceController.$inject = ['$log', 'appEnvironment', 'toaster', 'DiskSpace', '$scope'];
 
-    function DiskSpaceController($log, appEnvironment, toaster, DiskSpace) {
+    function DiskSpaceController($log, appEnvironment, toaster, DiskSpace, $scope) {
         var scope = this;
         scope.environment = appEnvironment.environment;
+        scope.currentTenancyId = $scope.$parent.health.currentTenancyId;
 
-        /* IMPLEMENTATIONS */
         scope.getDiskSpaceSummary = getDiskSpaceSummary;
 
         function getDiskSpaceSummary()
         {
-            return DiskSpace.getDiskSummaries({tenantId: 48});
+            return DiskSpace.getDiskSummaries({tenantId: scope.currentTenancyId});
         }
 
         scope.drives = scope.getDiskSpaceSummary();

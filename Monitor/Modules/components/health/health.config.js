@@ -11,7 +11,7 @@
 
         $stateProvider
             .state('health', {
-                url: '/health/{tenantId}',
+                url: '/health/:tenancyId',
                 views: {
                     'main': {
                         templateUrl: 'modules/components/health/health.tpl.html',

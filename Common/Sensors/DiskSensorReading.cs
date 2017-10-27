@@ -16,6 +16,10 @@ namespace Common.Sensors
         public float TotalSpace { get; set; }
         public float UsedSpace { get; set; }
 
+        private float FreeSpacePercent => TotalSpace.Equals(0) ? 0 : AvailableSpace / TotalSpace * 100;
+
+        public string AlertType => FreeSpacePercent > 15 ? "success" : FreeSpacePercent > 5 ? "warning" : "danger";
+
         public string SensorTarget = "/diskspace";
         public string GetSensorTarget()
         {

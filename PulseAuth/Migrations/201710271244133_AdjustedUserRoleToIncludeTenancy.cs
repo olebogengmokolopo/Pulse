@@ -17,12 +17,12 @@ namespace PulseAuth.Migrations
                     {
                         ApplicationUserId = c.Int(nullable: false),
                         TenancyId = c.Int(nullable: false),
-                        Role_Id = c.Int(),
+                        Role_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.ApplicationUserId, t.TenancyId })
-                .ForeignKey("dbo.AspNetRoles", t => t.Role_Id)
-                .ForeignKey("dbo.Tenancies", t => t.TenancyId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.Role_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Tenancies", t => t.TenancyId, cascadeDelete: true)
                 .Index(t => t.ApplicationUserId)
                 .Index(t => t.TenancyId)
                 .Index(t => t.Role_Id);
@@ -41,9 +41,9 @@ namespace PulseAuth.Migrations
                     })
                 .PrimaryKey(t => new { t.Tenancy_TenancyId, t.ApplicationUser_Id });
             
-            DropForeignKey("dbo.TenancyUserRoles", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.TenancyUserRoles", "TenancyId", "dbo.Tenancies");
             DropForeignKey("dbo.TenancyUserRoles", "Role_Id", "dbo.AspNetRoles");
+            DropForeignKey("dbo.TenancyUserRoles", "ApplicationUserId", "dbo.AspNetUsers");
             DropIndex("dbo.TenancyUserRoles", new[] { "Role_Id" });
             DropIndex("dbo.TenancyUserRoles", new[] { "TenancyId" });
             DropIndex("dbo.TenancyUserRoles", new[] { "ApplicationUserId" });
